@@ -1,10 +1,21 @@
-import { Background } from '../stykes/loginScreen.styles';
+import {
+  Background,
+  ContainerLogin,
+  ContainerLoginScreen,
+  LimitedContainer,
+  LogoImage,
+} from '../stykes/loginScreen.styles';
 
 const LoginScreen = () => {
   return (
-    <div>
+    <ContainerLoginScreen>
       <Background src="./background.png" />
-    </div>
+      <ContainerLogin>
+        <LimitedContainer>
+          <LogoImage src="./logo.jpg" />
+        </LimitedContainer>
+      </ContainerLogin>
+    </ContainerLoginScreen>
   );
 };
 
