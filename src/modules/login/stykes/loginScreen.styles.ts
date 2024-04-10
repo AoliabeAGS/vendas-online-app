@@ -1,4 +1,4 @@
-import styled from 'styled-components';
+import styled from "styled-components";
 
 export const ContainerLoginScreen = styled.div`
   display: flex;
@@ -17,6 +17,8 @@ export const Background = styled.img`
 `;
 
 export const LogoImage = styled.img`
+  border-radius: 30%;
+  align-self: center;
   width: 202px;
   height: 143px;
 `;
@@ -37,4 +39,5 @@ export const LimitedContainer = styled.div`
   max-width: 498px;
   display: flex;
   justify-content: center;
+  flex-direction: column;
 `;
