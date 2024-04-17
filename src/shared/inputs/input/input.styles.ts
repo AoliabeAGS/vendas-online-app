@@ -1,12 +1,11 @@
+import { Typography } from 'antd';
 import styled from 'styled-components';
 
-export const BoxInput = styled.div``;
+const { Text } = Typography;
+export const BoxInput = styled.div`
+    width: 100%;
+`;
 
-export const TitleInput = styled.h2`
-    font-size: 1.1rem;
-    line-height: 1.875rem;
-    font-weight: 500;
-    font-family: 'Poppins', sans-serif;
-    font-style: normal;
+export const TitleInput = styled(Text)`
     margin: 0.025rem;
 `;
