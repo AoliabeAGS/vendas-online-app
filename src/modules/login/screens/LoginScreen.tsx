@@ -1,3 +1,4 @@
+import axios from 'axios';
 import { useState } from 'react';
 
 import { Button } from '../../../shared/buttons/button/button';
@@ -12,15 +13,33 @@ import {
 } from '../stykes/loginScreen.styles';
 
 const LoginScreen = () => {
-    const [userName, setUserName] = useState('');
+    const [email, setemail] = useState('');
     const [password, setPassword] = useState('');
 
-    const handleUserName = (event: React.ChangeEvent<HTMLInputElement>) => {
-        setUserName(event.target.value);
+    const handleEmail = (event: React.ChangeEvent<HTMLInputElement>) => {
+        setemail(event.target.value);
     };
 
     const handlePassword = (event: React.ChangeEvent<HTMLInputElement>) => {
         setPassword(event.target.value);
+    };
+
+    const handleLogin = async () => {
+        await axios({
+            method: 'post',
+            url: 'http://localhost:8080/auth',
+            data: {
+                email: email,
+                password: password,
+            },
+        })
+            .then((result) => {
+                alert(`Fez login ${result.data.accessToken}`);
+                return result.data;
+            })
+            .catch(() => {
+                alert('Usuário ou senha inválido');
+            });
     };
     return (
         <ContainerLoginScreen>
@@ -35,8 +54,8 @@ const LoginScreen = () => {
                     <Input
                         title="Usuário"
                         margin="20px 0px 0px "
-                        onChange={handleUserName}
-                        value={userName}
+                        onChange={handleEmail}
+                        value={email}
                     />
                     <Input
                         type="password"
@@ -45,7 +64,7 @@ const LoginScreen = () => {
                         onChange={handlePassword}
                         value={password}
                     />
-                    <Button type="primary" margin="34px 0px 16px 0px">
+                    <Button type="primary" margin="34px 0px 16px 0px" onClick={handleLogin}>
                         Entrar
                     </Button>
                 </LimitedContainer>
