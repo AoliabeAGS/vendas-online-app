@@ -1,8 +1,8 @@
-import axios from 'axios';
 import { useState } from 'react';
 
-import { Button } from '../../../shared/buttons/button/button';
-import Input from '../../../shared/inputs/input/input';
+import { Button } from '../../../shared/components/button/button';
+import Input from '../../../shared/components/input/input';
+import { useRequests } from '../../../shared/hooks/useRequests';
 import {
     Background,
     ContainerLogin,
@@ -15,6 +15,7 @@ import {
 const LoginScreen = () => {
     const [email, setemail] = useState('');
     const [password, setPassword] = useState('');
+    const { postRequest, loading } = useRequests();
 
     const handleEmail = (event: React.ChangeEvent<HTMLInputElement>) => {
         setemail(event.target.value);
@@ -25,21 +26,7 @@ const LoginScreen = () => {
     };
 
     const handleLogin = async () => {
-        await axios({
-            method: 'post',
-            url: 'http://localhost:8080/auth',
-            data: {
-                email: email,
-                password: password,
-            },
-        })
-            .then((result) => {
-                alert(`Fez login ${result.data.accessToken}`);
-                return result.data;
-            })
-            .catch(() => {
-                alert('Usuário ou senha inválido');
-            });
+        postRequest('http://localhost:3000/login', { email, password });
     };
     return (
         <ContainerLoginScreen>
@@ -64,7 +51,12 @@ const LoginScreen = () => {
                         onChange={handlePassword}
                         value={password}
                     />
-                    <Button type="primary" margin="34px 0px 16px 0px" onClick={handleLogin}>
+                    <Button
+                        type="primary"
+                        margin="34px 0px 16px 0px"
+                        onClick={handleLogin}
+                        loading={loading}
+                    >
                         Entrar
                     </Button>
                 </LimitedContainer>
